@@ -14,6 +14,10 @@ def get_pixel_brightnesses(kepler_id):
 
 # Example usage
 kepler_id = 8462852  # Replace with your Kepler ID
-brightnesses = get_pixel_brightnesses(kepler_id)
-for row in brightnesses:
-    print(row)
+#brightnesses = get_pixel_brightnesses(kepler_id)
+#for row in brightnesses:
+#    print(row)
+target = lk.search_targetpixelfile(kepler_id)
+
+print("Downloading")
+
