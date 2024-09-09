@@ -11,8 +11,8 @@ def get_star_radius(kepler_id):
         
         # Extract the radius from the result
         radius = result['radius'][0]
-        print(result)
-        return radius
+        radius_value = str(radius).split()[0]
+        return radius_value
     
     except Exception as e:
         return f"An error occurred: {e}"
