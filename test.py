@@ -11,7 +11,8 @@ def get_star_radius(kepler_id):
         
         # Extract the radius from the result
         radius = result['radius'][0]
-        return f"The radius of the star with Kepler ID {kepler_id} is {radius} solar radii."
+        print(result)
+        return radius
     
     except Exception as e:
         return f"An error occurred: {e}"
