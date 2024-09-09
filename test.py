@@ -1,23 +1,34 @@
 from astroquery.nasa_exoplanet_archive import NasaExoplanetArchive
 
-def get_star_radius(kepler_id):
+def GetStarRadius(kepler_id):
     try:
-        # Query the NASA Exoplanet Archive for the given Kepler ID
         result = NasaExoplanetArchive.query_criteria(table="q1_q17_dr25_stellar", select="radius", where=f"kepid={kepler_id}")
         
-        # Check if the result is empty
         if len(result) == 0:
             return f"No data found for the given Kepler ID: {kepler_id}. Please check the ID and try again."
         
-        # Extract the radius from the result
         radius = result['radius'][0]
         radius_value = str(radius).split()[0]
         return radius_value
     
     except Exception as e:
         return f"An error occurred: {e}"
+    
 
-# Input the Kepler ID
-kepler_id = input("Enter the Kepler ID of the target: ")
-kepler_id = 757076
-print(get_star_radius(kepler_id))
+def GetExolanetSize(stdFlux, lowFlux, kepId, ):
+
+    """    
+    The simplest way to do it which ought to give a good answer is just to consider two 
+    overlapping circles with radius R (the star) and r (the planet) to estimate r when 
+    we know R we just think about the maximum depth of the transit light curve and the 
+    percentage decrease from normal brightness will just be 4*pi*r^2/4*pi*R^2 which 
+    simplifies to the ratio of the square of the radii. This should be more than good 
+    enough for your project though there are other factors to consider like light 
+    reflected by the planet when it is not transiting, atmospheric effects, variability
+    in the star's brightness etc
+    """
+
+    pass
+
+kepler_id = 757076 #Test Kepler ID
+print(GetStarRadius(kepler_id))
