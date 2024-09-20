@@ -37,7 +37,7 @@ def fetch_all_kepler_data1(kepler_id):
     print("CSV File data written successfully")
 
 
-def fetch_all_kepler_data(kepler_id):
+def fetch_all_kepler_data3(kepler_id):
     # Open the CSV file in write mode
     with open("keplerData.csv", mode='w', newline='') as f:
         w = csv.writer(f)
@@ -64,7 +64,34 @@ def fetch_all_kepler_data(kepler_id):
             for f in flux:
                 w.writerow([f])
 
-
+def fetch_all_kepler_data(kepler_id):
+    # Open the CSV file in write mode
+    with open("keplerData.csv", mode='w', newline='') as f:
+        w = csv.writer(f)
+        
+        # Search for all available TPFs using the Kepler ID
+        search_result = lk.search_targetpixelfile(kepler_id, mission='Kepler')
+        
+        # List to store flux arrays
+        flux_arrays = []
+        
+        # Loop through each search result and download the TPF
+        for tpf_file in search_result:
+            tpf = tpf_file.download()
+            
+            # Extract the light curve
+            lc = tpf.to_lightcurve()
+            
+            # Append the flux array to the list
+            flux_arrays.append(lc.flux)
+        
+        # Write the flux arrays to the CSV file
+        for i, flux in enumerate(flux_arrays):
+            print(f"Flux array for TPF {i+1}:")
+            for f in flux:
+                # Convert the flux value to a float and write to CSV
+                w.writerow([f.value])
+                
 # Example usage
 kepler_id = 11904151  # Replace with your Kepler Object ID
 fetch_all_kepler_data(kepler_id)
