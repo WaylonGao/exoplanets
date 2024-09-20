@@ -15,6 +15,7 @@ def fetch_all_kepler_data(kepler_id):
         #tpf.plot()
         
         # Extract the light curve
+        
         lc = tpf.to_lightcurve()
         
         # Append the flux array to the list
