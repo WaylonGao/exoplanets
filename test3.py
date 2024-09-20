@@ -27,6 +27,9 @@ def GetExolanetSize(stdFlux, lowFlux, kepId, ):
     reflected by the planet when it is not transiting, atmospheric effects, variability
     in the star's brightness etc
     """
+    #First first step is to confirm the validity of the Kepler ID before sending any web requests.
+    #First step is to fetch the radius of the star from the NASA Exoplanet Archive
+    
 
     pass
 
